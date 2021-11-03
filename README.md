@@ -5,6 +5,6 @@ Assigment is related to learning OOPS concepts.
 
 DAY 1:
 
-1.Done with creation on two classes and store properties like title,message,name and date.
+1.Done with creation of two classes and store properties like title,message,name and date.
 
 2.Learn how to store content in file with file_put_contents().
