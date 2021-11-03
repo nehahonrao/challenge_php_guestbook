@@ -2,35 +2,29 @@
 <head>
 <title>Guestbook</title>
 </head>
+<link rel="stylesheet" href="style.css">
 <?php
-	require "post.php";
-    
-    // $title=htmlspecialchars($_POST['title']);
-    // $message=htmlspecialchars($_POST['message']);
-    // $username=htmlspecialchars($_POST['username']);
-    $data= date("d/m/Y H:i:s");
-    // echo $post1->title;
-?>
+	
+require 'post.php';
+require 'Postloader.php';
+$loader = new PostLoader();
 
-<?php
+if (isset ($_POST['author']))
+{
+    $title = htmlspecialchars($_POST['title']);
+    $author = htmlspecialchars($_POST['author']);
+    $guestMessage = htmlspecialchars($_POST['guestMessage']);
 
-$post1= new post();
+    if (empty($author) || empty($guestMessage)|| empty($title))
+    {
+        throw new Exception("fill in your details");
+    }
 
-
-
-$file = 'people.txt';
-// Open the file to get existing content
-$current = file_get_contents($file);
-// Append a new person to the file
-$txt='<div id="msg"><font color="blue">Message written by: '.$post1->author_name.'<br /><br />';
-echo "<br>";
-$txt .='Message: '.$post1->content. '<br /><br />';
-echo "<br>";
-$txt .="Message written on: ".$data. ' <br /><br />'.' ' .'</font> </div>';
-        
-// Write the contents back to the file
-file_put_contents($file, $txt);
-echo '<a href="index.php">Read Review </a>';
+    $post = new Post($title, $author, $guestMessage);
+    $loader->addPost($post);
+    $loader->savePosts();
+    echo "messages are saved";
+}
 ?>
 
 <body>
@@ -39,13 +33,14 @@ echo '<a href="index.php">Read Review </a>';
 		<div id="msg">
 		<form action="index.php" method="post">
 		Title: <input type="text" id="title" name="title"/><br />
-		Write your message: <br /> <textarea name="message" rows="10" cols="30" ></textarea><br /> <br />
-		Name:<input type="text" id="username" name="username" /><br/><br>
+		Write your message: <br /> <textarea name="guestMessage" rows="10" cols="30" ></textarea><br /> <br />
+		Name:<input type="text" id="username" name="author" /><br/><br>
         <input type="submit" value="send msg">
 		<input type="reset" value="Cancel">
         
         </form>
 		</div>
+        
 </body>
  
 </html>
