@@ -16,9 +16,9 @@ DAY 1:🙂
 
 DAY 2:🙂
 
-1. done with displaying date and time when message is posted.
+1.Done with displaying date and time when message is posted.
 
-2. Done with displaying on browser feedback given by customers. 
+2.Done with displaying on browser feedback given by customers. 
 
 3.Done with must have requirement given in assignment😀
 
