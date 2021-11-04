@@ -4,7 +4,8 @@
 </head>
 <link rel="stylesheet" href="style.css">
 <?php
-	
+
+require 'emoji.php';
 require 'post.php';
 require 'Postloader.php';
 $loader = new PostLoader();
@@ -30,7 +31,7 @@ if (isset ($_POST['title']))
     $posts = array_reverse($posts); //store reversed array in variable
 
     //Only show the latest 20 posts.
-    $posts = array_slice($posts, 0, 20);
+    $posts = array_slice($posts, 0, 12);
     
 ?>
  
@@ -38,10 +39,12 @@ if (isset ($_POST['title']))
 <?php  }?>
 
 <body>
- 
-
+    <div >
+       <h3 class="mainstyle">GuestBook<h3>
+       
+</div>
 		<div id="msg">
-		<form action="index.php" method="post">
+        <form action="index.php" method="post">
 		Title: <input type="text" id="title" name="title"/><br /><br>
 		Write your message: <br /> <textarea name="guestMessage" rows="10" cols="30" ></textarea><br /> <br />
 		Name:<input type="text" id="username" name="author" /><br/><br>
@@ -66,7 +69,13 @@ echo "Greeting:".' '.$post->getTitle();
 echo "<br>";
 echo "Message Written By:".' ' .$post->getAuthor();
 echo "<br>";
-echo "Message is:".' ' .$post->getContent();
+$arr = [];
+$str = '';
+$arr = explode(' ', $post->getContent()); 
+    foreach($arr as $word) {
+        $str .= Emoji::stringToEmoji($word) . ' ';
+    }
+echo "Message is:".' ' .$str;
 echo "<br>";
 echo "Message is written on:".' ' .$post->getDate();
 echo "<br>";
