@@ -1,5 +1,6 @@
 <?php 
 class PostLoader {
+
     private const FILE_NAME = 'people.txt';
 
     /** @var POST[] */

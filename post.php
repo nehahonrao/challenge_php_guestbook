@@ -10,7 +10,7 @@ class Post {
     private string $title;
     private string $author;
     private string $guestMessage;
-    private DateTimeImmutable $date;
+    private string $date;
 
     /**
      * Post constructor.
@@ -22,7 +22,7 @@ class Post {
         $this->title= $title;
         $this->author = $author;
         $this->guestMessage = $guestMessage;
-        $this->date = new DateTimeImmutable();
+        $this->date = date('y-m-d h:i:s');
     }
     public function getTitle()
     {
@@ -31,13 +31,19 @@ class Post {
 
     public function getContent()
     {
-        return $this->content;
+        return $this->guestMessage;
     }
 
     public function getAuthor()
     {
         return $this->author;
     }
+    public function getDate()
+    {
+        return $this->date;
+    }
+    
+
     
 
 }
